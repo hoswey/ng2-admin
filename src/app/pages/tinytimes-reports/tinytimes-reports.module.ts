@@ -15,6 +15,7 @@ import { Hour24ChannelDetailComponent } from './me/hour-24-channel-details.compo
 import { Hour24ChannelDemoComponent } from './me/hour-24-channel-demo.component.ts'
 import { Hour24ChannelDetailSmartComponent } from './me/hour-24-channel-details-smart.component'
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import {AnchorLiveShowDayComponent} from "./me/anchor-live-show-day.component";
 
 @NgModule({
   imports: [
@@ -33,7 +34,8 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     Hour24ChannelDauComponent,
     Hour24ChannelDetailComponent,
     Hour24ChannelDemoComponent,
-    Hour24ChannelDetailSmartComponent
+    Hour24ChannelDetailSmartComponent,
+      AnchorLiveShowDayComponent
   ],
   providers:[
     EasyqService
