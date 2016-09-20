@@ -15,7 +15,7 @@ class Column {
 @Component({
   selector: "me-simple-chart",
   template: `
-  <ba-card baCardClass="with-scroll table-panel container">
+  <ba-card baCardClass="table-panel container">
     <div class="row">
       <div class="col-md-8">
           <div class="btn-group pull-left" role="group">
