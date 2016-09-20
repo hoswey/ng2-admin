@@ -2,8 +2,13 @@ import {Component, ViewEncapsulation} from "@angular/core";
 
 @Component({
     template: `
-        <comm-simple-table [table]="table" [settings]="settings"></comm-simple-table>
+        <me-simple-table [table]="table" [settings]="settings"></me-simple-table>
   `,
+    styles: [
+        `th.ng2-smart-th.nick {
+            width: 100px;
+        }`
+    ],
     encapsulation: ViewEncapsulation.None,
 })
 export class AnchorLiveShowDayComponent {

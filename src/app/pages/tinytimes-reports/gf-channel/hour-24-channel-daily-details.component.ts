@@ -1,10 +1,10 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { NumToPercentPipe } from '../../../shared/pipes/format'
 
 @Component({
   template: `
-      <comm-simple-table [table]="table" [settings]="settings"></comm-simple-table>
+      <me-simple-table [table]="table" [settings]="settings"></me-simple-table>
   `,
-  directives: [],
   styles: [
     `th.ng2-smart-th.start_time {
       width: 180px;
@@ -16,7 +16,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
   ],
   encapsulation: ViewEncapsulation.None,
 })
-export class Hour24ChannelDetailSmartComponent {
+export class Hour24ChannelDailyDetailsComponent {
 
   table:string = 'bproduct_me_24_hour_daily_details';
 
@@ -52,10 +52,25 @@ export class Hour24ChannelDetailSmartComponent {
         title: 'pcu',
         type: 'number'
       },
-      dau: {
-        title: 'dau',
+      e_income: {
+        title: 'e豆收益',
         type: 'number'
       },
+      avg_duration: {
+        title: '人均观看时长',
+        type: 'number'
+      },
+      exposed_cnt: {
+        title: '曝光人数',
+        type: 'number'
+      },
+      jump_rate: {
+        title: '跳出率',
+        type: 'number',
+        valuePrepareFunction: (value) => {
+          return new NumToPercentPipe().transform(value, 2);
+        }
+      }
     }
   };
 }
