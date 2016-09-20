@@ -10,12 +10,8 @@ import { ReportDescBody } from '../../../shared/component/me-report-desc/me-repo
   template: `
     <div>
         <me-simple-chart [table]="table" [settings]="settings"></me-simple-chart>
-        <div style="margin-top: 15px">
-            <me-simple-table [table]="table" [settings]="settings"></me-simple-table>
-        </div>
-        <div style="margin-top: 15px;">
-            <me-report-desc [descBody]="descBody"></me-report-desc>
-        </div>
+        <me-simple-table [table]="table" [settings]="settings"></me-simple-table>
+        <me-report-desc [descBody]="descBody"></me-report-desc>
     </div>
     `,
   styles: [

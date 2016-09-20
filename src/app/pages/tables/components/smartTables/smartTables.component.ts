@@ -31,6 +31,10 @@ export class SmartTables {
       deleteButtonContent: '<i class="ion-trash-a"></i>',
       confirmDelete: true
     },
+    pager: {
+      display: true,
+      perPage: 50
+    },
     columns: {
       id: {
         title: 'ID',
