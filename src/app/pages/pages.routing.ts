@@ -25,7 +25,8 @@ const routes:Routes = [
       {path: 'maps', loadChildren: () => System.import('./maps/maps.module')},
       {path: 'home', loadChildren: () => System.import('./home/home.module')},
       {path: 'tinytimes-reports', loadChildren: () => System.import('./tinytimes-reports/tinytimes-reports.module')},
-      {path: 'user-manage', loadChildren: () => System.import('./user-manage/user-manage.module')}
+      {path: 'user-manage', loadChildren: () => System.import('./user-manage/user-manage.module')},
+      {path: 'sys-manage', loadChildren: () => System.import('./sys-manage/sys-manage.module')}
     ]
   }
 ];
