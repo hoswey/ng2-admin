@@ -25,7 +25,7 @@ export class EasyqService {
     let url = "http://platform.report.me.yy.com/api/v2/report/_table/" + options.table;
 
     let offset = options.offset || 0;
-    let limit = options.limit || 9999;
+    let limit = options.limit || 500000;
     let order = options.order || '';
     let filter = options.filter || '';
     let params = new URLSearchParams();

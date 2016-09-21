@@ -87,6 +87,7 @@ export class MeSimpleTableComponent implements OnInit {
       order: 'date desc'
     }).subscribe((rows) => {
       this.source.load(rows)
+      this.msgs.push({severity: 'info', summary: '刷新成功', detail: ''});
     });
   }
 
@@ -128,7 +129,6 @@ export class MeSimpleTableComponent implements OnInit {
 
   private setDateRange():void {
     this.doFilter();
-    this.msgs.push({severity: 'info', summary: '刷新成功', detail: ''});
   }
 
   private onSelect(event:any):void {
