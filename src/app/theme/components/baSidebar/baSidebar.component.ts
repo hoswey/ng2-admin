@@ -1,7 +1,6 @@
 import {Component, ElementRef, HostListener, ViewEncapsulation} from '@angular/core';
 import {GlobalState} from '../../../global.state';
 import {layoutSizes} from '../../../theme';
-import {BaMenu} from '../baMenu';
 import {MENU} from '../../../../app/app.menu';
 import {MenuService} from '../../../shared/service';
 import * as _ from 'lodash';
@@ -12,7 +11,6 @@ import * as _ from 'lodash';
   styles: [require('./baSidebar.scss')],
   template: require('./baSidebar.html'),
   providers: [MenuService],
-  directives: [BaMenu]
 })
 export class BaSidebar {
 

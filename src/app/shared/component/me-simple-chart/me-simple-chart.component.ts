@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { EasyqService } from '../../service/easyq.service';
 import '../../loader/jquery-ui-loader'
 import * as _ from 'lodash';
-import { CHART_DIRECTIVES } from 'angular2-highcharts';
+
 
 class Column {
   name:string;
@@ -39,7 +39,6 @@ class Column {
     </div>
   </ba-card>
 `,
-  directives: [CHART_DIRECTIVES],
   styles: [
     `
   chart {

@@ -35,7 +35,6 @@ export interface ReportDescBody {
         </div>
     </div>
 `,
-  directives: [],
   styles: []
 })
 export class MeReportDescComponent {

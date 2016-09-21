@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewEncapsulation, Input, Output, ViewChild, Renderer, ElementRef } from '@angular/core';
-import { DomSanitizationService } from '@angular/platform-browser';
 
 import { Observable } from 'rxjs/Observable';
 import { EasyqService } from '../../service/easyq.service';
@@ -33,7 +32,6 @@ import { Message } from 'primeng/primeng';
       </div>
       <p-growl name="message" [value]="msgs"></p-growl>
   `,
-  directives: [],
   styles: [require('../../../pages/tables/components/smartTables/smartTables.scss')],
   encapsulation: ViewEncapsulation.None,
 })
@@ -67,7 +65,7 @@ export class MeSimpleTableComponent implements OnInit {
 
   msgs:Message[] = [];
 
-  constructor(private easyqService:EasyqService, private renderer:Renderer, private sanitization:DomSanitizationService) {
+  constructor(private easyqService:EasyqService, private renderer:Renderer) {
   }
 
   ngOnInit() {

@@ -1,16 +1,13 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 
-
-import {LocalDataSource} from 'ng2-smart-table';
 import { SmartTablesService } from './smartTables.service';
+import { LocalDataSource } from 'ng2-smart-table';
 
 @Component({
   selector: 'basic-tables',
   encapsulation: ViewEncapsulation.None,
-  directives: [],
   styles: [require('./smartTables.scss')],
-  template: require('./smartTables.html'),
-  providers: [SmartTablesService]
+  template: require('./smartTables.html')
 })
 export class SmartTables {
 
@@ -30,10 +27,6 @@ export class SmartTables {
     delete: {
       deleteButtonContent: '<i class="ion-trash-a"></i>',
       confirmDelete: true
-    },
-    pager: {
-      display: true,
-      perPage: 50
     },
     columns: {
       id: {

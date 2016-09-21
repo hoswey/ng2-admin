@@ -6,7 +6,6 @@ import { ReportDescBody } from '../../../shared/component/me-report-desc/me-repo
 
 @Component({
   selector: 'simple-chart-example',
-  directives: [],
   template: `
     <div>
         <me-simple-chart [table]="table" [settings]="settings"></me-simple-chart>
@@ -14,9 +13,7 @@ import { ReportDescBody } from '../../../shared/component/me-report-desc/me-repo
         <me-report-desc [descBody]="descBody"></me-report-desc>
     </div>
     `,
-  styles: [
-  ],
-  providers: []
+  styles: []
 })
 export class Hour24ChannelDailySummaryComponent implements OnInit {
 
