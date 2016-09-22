@@ -16,6 +16,7 @@ export class TableService {
     }
 
     public listAllTable(): Observable<Table[]> {
+        console.log("listalltable");
         return this.http.get(this.baseUrl + 'listTables.do', {withCredentials: true})
             .map((resp: Response) => {
                     return <Table[]>resp.json();
