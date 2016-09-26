@@ -156,7 +156,6 @@ export class MeSimpleChartComponent implements OnInit {
                   };
                 });
 
-                console.log(JSON.stringify(serials));
                 serials = serials.map((serial) =>{
                   //对于数据不全的，补全数据
                   let name:string = serial.name;
@@ -173,7 +172,6 @@ export class MeSimpleChartComponent implements OnInit {
                   };
                 });
 
-                console.log(JSON.stringify(serials));
                 this.options = {
                   title: {
                     text: this.selectedColumn.title
