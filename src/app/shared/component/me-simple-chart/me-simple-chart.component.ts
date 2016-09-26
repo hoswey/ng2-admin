@@ -1,15 +1,12 @@
-import { Component, OnInit, ViewEncapsulation, Input, Output, ViewChild, Renderer, ElementRef } from '@angular/core';
-import { DomSanitizationService } from '@angular/platform-browser';
-
-import { Observable } from 'rxjs/Observable';
-import { EasyqService } from '../../service/easyq.service';
-import '../../loader/jquery-ui-loader'
-import * as _ from 'lodash';
+import {Component, OnInit, Input} from "@angular/core";
+import {Observable} from "rxjs/Observable";
+import {EasyqService} from "../../service";
+import "../../loader/jquery-ui-loader";
 
 
 class Column {
-  name:string;
-  title:string;
+  name: string;
+  title: string;
 }
 
 @Component({
@@ -49,28 +46,28 @@ class Column {
 })
 export class MeSimpleChartComponent implements OnInit {
 
-  private options:HighchartsOptions;
+  private options: HighchartsOptions;
 
   @Input()
-  private table:string;
+  private table: string;
 
   @Input()
-  private settings:any;
+  private settings: any;
 
-  private columns:Column[];
+  private columns: Column[];
 
-  private selectedColumn:Column;
+  private selectedColumn: Column;
 
-  chartNameColumn:Column; //展示x轴的名,通常是频道名或用户名
+  chartNameColumn: Column; //展示x轴的名,通常是频道名或用户名
 
-  chartKeyColumn:Column; //通常是chartNameColumn对应的主键列名
+  chartKeyColumn: Column; //通常是chartNameColumn对应的主键列名
 
-  daysRange:number = 7;
+  daysRange: number = 7;
 
-  constructor(private easyqService:EasyqService) {
+  constructor(private easyqService: EasyqService) {
   }
 
-  ngOnInit():void {
+  ngOnInit(): void {
 
     console.log(JSON.stringify(this.settings.columns));
 
@@ -81,7 +78,7 @@ export class MeSimpleChartComponent implements OnInit {
         continue;
       }
 
-      let column:Column = new Column();
+      let column: Column = new Column();
       column.name = key;
       column.title = this.settings.columns[key]['title'];
 
@@ -107,22 +104,21 @@ export class MeSimpleChartComponent implements OnInit {
     this.render();
   }
 
-  doColumnFilter(column:Column):void {
+  doColumnFilter(column: Column): void {
     this.selectedColumn = column;
     this.render()
   }
 
-  private render():void {
+  private render(): void {
 
     this.easyqService.getMaxDate(this.table).subscribe(
-      (date:string) => {
+      (date: string) => {
         this.easyqService.getData({
           table: this.table,
           filter: '(date =' + date + ')'
         }).subscribe(
-          (rows:any[]) => {
-
-            let chartKeys:string[] = rows.map(
+          (rows: any[]) => {
+            let chartKeys: string[] = rows.map(
               row => {
                 return row[this.chartKeyColumn.name];
               }
@@ -136,21 +132,23 @@ export class MeSimpleChartComponent implements OnInit {
                   order: 'date desc',
                   limit: this.daysRange
                 })
-              )).subscribe((rowsArray:any[]) => {
+              )).subscribe((rowsArray: any[]) => {
 
-                let dates:string[];
-
-                rowsArray = rowsArray.map(rows => {
-
+                let dates: string[] = [];
+                let serials: any[] = rowsArray.map(rows => {
                   rows.reverse();
-
-                  let points:number[] = rows.map(row => {
+                  let points: number[] = rows.map(row => {
                     return row[this.selectedColumn.name]
                   });
 
-                  dates = rows.map(record => {
+                  const subDates: string[] = rows.map(record => {
                     return record.date
                   });
+
+                  //获取里面日期最全的一个日期数据，某些数据由于新添加，数据会存在不全的情况
+                  if (dates.length < subDates.length) {
+                    dates = subDates;
+                  }
 
                   return {
                     name: rows[0][this.chartNameColumn.name],
@@ -158,6 +156,24 @@ export class MeSimpleChartComponent implements OnInit {
                   };
                 });
 
+                console.log(JSON.stringify(serials));
+                serials = serials.map((serial) =>{
+                  //对于数据不全的，补全数据
+                  let name:string = serial.name;
+                  let points:number[] = serial.data;
+
+                  const left = dates.length - points.length;
+                  for (let k:number=0; k < left; k++){
+                    points.unshift(0);
+                  }
+
+                  return {
+                    name : name,
+                    data: points
+                  };
+                });
+
+                console.log(JSON.stringify(serials));
                 this.options = {
                   title: {
                     text: this.selectedColumn.title
@@ -165,12 +181,7 @@ export class MeSimpleChartComponent implements OnInit {
                   xAxis: {
                     categories: dates
                   },
-                  //yAxis: {
-                  //  title: {
-                  //    text: "用户数"
-                  //  }
-                  //},
-                  series: rowsArray
+                  series: serials
                 };
               }
             )
@@ -180,7 +191,7 @@ export class MeSimpleChartComponent implements OnInit {
     );
   }
 
-  private onRangeClick(range:number):void {
+  private onRangeClick(range: number): void {
 
     this.daysRange = range;
     this.render();
