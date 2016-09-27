@@ -44,4 +44,17 @@ export class TableService {
             });
 
     }
+
+    saveTableMenus(selectedTable: Object, menuIds: (number)[]) {
+        let headers = new Headers({'Content-Type': 'application/json'});
+        let options = new RequestOptions({headers: headers, withCredentials: true});
+        let data = {
+            tableId: selectedTable.id,
+            menuIds: menuIds
+        };
+
+        console.log(JSON.stringify(data));
+        return this.http.post(this.baseUrl + "updateTableMenus.do", JSON.stringify(data), options);
+
+    }
 }

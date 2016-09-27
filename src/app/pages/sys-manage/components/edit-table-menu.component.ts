@@ -1,5 +1,7 @@
 import {OnInit, Component} from "@angular/core";
 import {TableService, Table} from "../../../shared/service/table.service";
+import {Message} from "primeng/components/common/api";
+import {forEach} from "@angular/router/src/utils/collection";
 @Component({
     selector: 'dropdown-tables',
     template: `
@@ -27,17 +29,20 @@ import {TableService, Table} from "../../../shared/service/table.service";
                       </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-sm-10">
+                        <button class="btn btn-danger" (click)="saveTableMenus()">保存</button>
+                    </div>
+                </div>
             </ba-card>
+            <p-growl name="message" [value]="msgs"></p-growl>
         </div>
     `,
-    styles: [
-        `ba-card:{
-            min-height: 100px;
-        }`
-    ]
+    styles: []
 
 })
 export class EditTableMenuComponent implements OnInit {
+    msgs: Message[] = [];
     public tables: Object[];
     public selectedTable: Object = {id: -1, name: "选择表"};
     public menuTables: any[] = [
@@ -76,18 +81,31 @@ export class EditTableMenuComponent implements OnInit {
 
     public selectTable(table: Object): void {
         this.selectedTable = table;
-        this.tableService.getTableMenuByTable(table).subscribe((menuTables: any)=> {
-            console.log(JSON.stringify(menuTables));
-            this.checkboxModel = tableMenus.map((menuTable: any) => {
+        this.tableService.getTableMenuByTable(table).subscribe((menuTables: any[])=> {
+            this.checkboxModel = menuTables.map((menuTable: any) => {
                 return {
                     name: menuTable.title,
                     // container id
-                    checked: ()=>{
-                        this.selectedTable.id in menuTable.tables.map
-                    },
-                    class: 'col-md-4'
+                    checked: menuTable.tables.some((table: any)=> {
+                        return table.id === this.selectedTable.id;
+                    }),
+                    class: 'col-md-4',
+                    menuId: menuTable.id
                 }
             });
         });
+    }
+
+    public saveTableMenus(): void {
+        let menuIds: number[] = [];
+        this.checkboxModel.forEach((ckbox, index)=> {
+            if (ckbox.checked) {
+                menuIds.push(ckbox.menuId);
+            }
+        });
+        this.tableService.saveTableMenus(this.selectedTable, menuIds).subscribe(()=> {
+            this.msgs.push({severity: 'info', summary: '保存成功', detail: ''});
+        });
+
     }
 }
