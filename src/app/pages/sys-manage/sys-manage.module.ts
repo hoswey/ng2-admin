@@ -1,6 +1,6 @@
 import {NgModule} from "@angular/core";
 import {routing} from "./sys-manage.routing";
-import {EditTableComponent, DropdownTableComponent} from "./components/edit-table.component";
+import {CreateTableComponent} from "./components/create-table.component";
 import {TableService} from "../../shared/service/table.service";
 import {GrowlModule} from "primeng/components/growl/growl";
 import {FormsModule} from "@angular/forms";
@@ -9,6 +9,8 @@ import {DropdownModule} from "ng2-bootstrap";
 import {CommonModule} from "@angular/common";
 import {NgaModule} from "../../theme/nga.module";
 import {RatingModule} from "primeng/components/rating/rating";
+import {EditTableMenuComponent} from "./components/edit-table-menu.component";
+import {SysTableComponent} from "./components/sys-table.component";
 
 
 @NgModule({
@@ -23,8 +25,9 @@ import {RatingModule} from "primeng/components/rating/rating";
     ],
     declarations: [
         SysManageComponent,
-        EditTableComponent,
-        DropdownTableComponent
+        SysTableComponent,
+        CreateTableComponent,
+        EditTableMenuComponent
     ],
     providers: [
         TableService
