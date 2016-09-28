@@ -11,6 +11,7 @@ import {NgaModule} from "../../theme/nga.module";
 import {RatingModule} from "primeng/components/rating/rating";
 import {EditTableMenuComponent} from "./components/edit-table-menu.component";
 import {SysTableComponent} from "./components/sys-table.component";
+import {EditTableComponent} from "./components/edit-table.component";
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import {SysTableComponent} from "./components/sys-table.component";
         SysManageComponent,
         SysTableComponent,
         CreateTableComponent,
+        EditTableComponent,
         EditTableMenuComponent
     ],
     providers: [

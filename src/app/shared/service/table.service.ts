@@ -15,11 +15,11 @@ export class TableService {
 
     }
 
-    public listAllTable(): Observable<Object[]> {
+    public listAllTable(): Observable<Table[]> {
         console.log("listalltable");
         return this.http.get(this.baseUrl + 'listTables.do', {withCredentials: true})
             .map((resp: Response) => {
-                    return <Object[]>resp.json();
+                    return <any[]>resp.json();
                 }
             );
     }
@@ -53,8 +53,26 @@ export class TableService {
             menuIds: menuIds
         };
 
-        console.log(JSON.stringify(data));
         return this.http.post(this.baseUrl + "updateTableMenus.do", JSON.stringify(data), options);
+
+    }
+
+    updateTable(table: any) {
+        let headers = new Headers({'Content-Type': 'application/json'});
+        let options = new RequestOptions({headers: headers, withCredentials: true});
+
+        return this.http.post(this.baseUrl + "updateTable.do", JSON.stringify(table), options)
+            .map((resp: Response) => {
+                return <Table>resp.json();
+            });
+    }
+
+    deleteTable(table: any) {
+        let headers = new Headers({'Content-Type': 'application/json'});
+        let options = new RequestOptions({headers: headers, withCredentials: true});
+
+        return this.http.post(this.baseUrl + "deleteTable.do", JSON.stringify(table), options);
+
 
     }
 }
