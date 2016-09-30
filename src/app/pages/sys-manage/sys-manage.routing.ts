@@ -1,6 +1,7 @@
 import {Routes, RouterModule} from "@angular/router";
-import {EditTableComponent} from "./components/edit-table.component";
+import {CreateTableComponent} from "./components/create-table.component";
 import {SysManageComponent} from "./sys-manage.component";
+import {SysTableComponent} from "./components/sys-table.component";
 
 
 const routes: Routes = [
@@ -10,7 +11,7 @@ const routes: Routes = [
         children: [
             {
                 path: 'edit-table',
-                component: EditTableComponent
+                component: SysTableComponent
             }
         ]
     }
