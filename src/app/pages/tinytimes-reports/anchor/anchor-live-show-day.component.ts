@@ -16,9 +16,8 @@ export class AnchorLiveShowDayComponent {
     table: string = 'bproduct_me_anchor_live_show_day';
 
     settings = {
-
+        isRemoteDataSource: true,
         columns: {
-
             date: {
                 title: '日期',
                 type: 'string'

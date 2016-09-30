@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Request, Response, URLSearchParams, QueryEncoder } from '@angular/http';
+import { Http, Response, URLSearchParams,RequestOptionsArgs } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
 
 import 'rxjs/Rx';
@@ -12,45 +12,54 @@ export interface EasyqParam {
   offset?:number;
 }
 
+export interface Field {
+  name:string;
+  type:string
+}
 @Injectable()
 export class EasyqService {
 
-  private url:string = "http://platform.report.me.yy.com/api/v2/report/_table/";
+  private tableUrl:string = "http://platform.report.me.yy.com/api/v2/report/_table/";
+
+  private schemaUrl:string = "http://platform.report.me.yy.com/api/v2/report/_schema/";
 
   constructor(private http:Http) {
   }
 
   public getData(options:EasyqParam):Observable<any> {
 
-    let url = "http://platform.report.me.yy.com/api/v2/report/_table/" + options.table;
+    let url = this.tableUrl + options.table;
 
     let offset = options.offset || 0;
     let limit = options.limit || 500000;
     let order = options.order || '';
     let filter = options.filter || '';
+
     let params = new URLSearchParams();
-    //params.set('limit', limit.toString());
-    //params.set('offset', offset.toString());
-    //
-    //if (options.order) {
-    //  params.set('order', options.order.toString());
-    //}
-    //if (options.filter) {
-    //  params.set('filter', options.filter.toString());
-    //}
+    params.set('limit', limit.toString());
+    params.set('offset', offset.toString());
 
-    //暂时解决方法,由于URLSearchParams存在"="编码的bug
-    url += "?";
-    url += "offset=" + offset;
-    url += "&limit=" + limit;
-    url += "&order=" + order;
-    url += "&filter=" + filter;
+    if (options.order) {
+     params.set('order', options.order.toString());
+    }
+    if (options.filter) {
+     params.set('filter', options.filter.toString());
+    }
 
-    return this.http.get(url, {withCredentials: true})
+    return this.http.get(url, {withCredentials: true,search: params})
       .map((resp:Response) => {
         return resp.json().resource
       });
   }
+
+  public getSchema(table:String):Observable<Field[]> {
+
+    return this.http.get(this.schemaUrl + table, {withCredentials: true})
+      .map((resp:Response) => {
+        return <Field[]>resp.json().field;
+      });
+  }
+
 
   public getMaxDate(table:string):Observable<string> {
 
