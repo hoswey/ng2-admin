@@ -1,12 +1,12 @@
-import { Component, OnInit, ViewEncapsulation, Input, Output, ViewChild, Renderer, ElementRef } from '@angular/core';
+import {Component, OnInit, ViewEncapsulation, Input, Injector} from '@angular/core';
 
-import { Observable } from 'rxjs/Observable';
-import { EasyqService } from '../../service/easyq.service';
-import { LocalDataSource } from 'ng2-smart-table';
+import {EasyqService} from '../../service';
+import {LocalDataSource} from 'ng2-smart-table';
+import {RemoteDataSource} from './data-source/remote-data-source'
+// import {DataSource} from 'ng2-smart-table';
 import '../../loader/jquery-ui-loader'
 import * as _ from 'lodash';
-import { Message } from 'primeng/primeng';
-//import './json2csv-loader.ts';
+import {Message} from 'primeng/primeng';
 
 @Component({
   selector: "me-simple-table",
@@ -18,7 +18,7 @@ import { Message } from 'primeng/primeng';
               <p-calendar [(ngModel)]="from" dateFormat="yy-mm-dd" (onSelect) = "onSelect($event)"  ngDefaultControl></p-calendar>
               To:&nbsp;
               <p-calendar [(ngModel)]="to" dateFormat="yy-mm-dd" (onSelect) = "onSelect($event)"  ngDefaultControl></p-calendar>
-              <button class="btn btn-warning" (click)="setDateRange()">查询</button>
+              <button class="btn btn-warning" (click)="doQuery()">查询</button>
           </div>
           <div class="col-md-4 text-right">
               <button class="btn btn-primary" (click)="export2Csv()">导出</button>
@@ -26,7 +26,7 @@ import { Message } from 'primeng/primeng';
         </div>
         <div class="card-body row">
           <div class="col-md-12">
-            <ng2-smart-table [settings]="settings" [source]="source"></ng2-smart-table>
+            <ng2-smart-table [settings]="settings" [source]="dataSource"></ng2-smart-table>
           </div>
         </div>
       </div>
@@ -37,10 +37,10 @@ import { Message } from 'primeng/primeng';
 })
 export class MeSimpleTableComponent implements OnInit {
 
-  @Input() table:string;
+  @Input() table: string;
 
   @Input()
-  settings:any;
+  settings: any;
 
   defaultSettings = {
     actions: {
@@ -55,43 +55,47 @@ export class MeSimpleTableComponent implements OnInit {
     }
   };
 
-  rows:any[];
+  rows: any[];
 
-  source:LocalDataSource = new LocalDataSource();
+  dataSource: any;
 
-  from:string;
+  from: string;
 
-  to:string;
+  to: string;
 
-  msgs:Message[] = [];
+  msgs: Message[] = [];
 
-  constructor(private easyqService:EasyqService, private renderer:Renderer) {
+  constructor(private easyqService: EasyqService, private injector: Injector) {
   }
 
   ngOnInit() {
 
     this.settings = _.merge(this.defaultSettings, this.settings);
-
-    this.easyqService.getMaxDate(this.table).subscribe((date:string) => {
-      this.from = date;
-      this.to = date;
-      this.doFilter();
-    });
+    if (this.settings.isRemoteDataSource) {
+      this.dataSource = new RemoteDataSource(this.easyqService, this.table);
+    } else {
+      this.easyqService.getMaxDate(this.table).subscribe((date: string) => {
+        this.from = date;
+        this.to = date;
+        this.dataSource = new LocalDataSource();
+        this.doFilterLocal();
+      });
+    }
   }
 
-  private doFilter():void {
+  private doFilterLocal(): void {
 
     this.easyqService.getData({
       table: this.table,
       filter: '((date >="' + this.from + '") and (date <="' + this.to + '"))',
       order: 'date desc'
     }).subscribe((rows) => {
-      this.source.load(rows)
+      this.dataSource.load(rows);
       this.msgs.push({severity: 'info', summary: '刷新成功', detail: ''});
     });
   }
 
-  private export2Csv():void {
+  private export2Csv(): void {
 
     let titleMap = [];
     let titles = [];
@@ -101,15 +105,14 @@ export class MeSimpleTableComponent implements OnInit {
         continue;
       }
 
-      const title:string = this.settings.columns[key]['title'];
-
+      const title: string = this.settings.columns[key]['title'];
       titleMap[key] = title;
       titles.push(title);
     }
 
-    this.source.getAll().then((rows:any[]) => {
+    this.dataSource.getAll().then((rows: any[]) => {
 
-      let newRows:any[] = rows.map((row:any) => {
+      let newRows: any[] = rows.map((row: any) => {
 
         let newRow = {};
         for (let key in row) {
@@ -122,15 +125,29 @@ export class MeSimpleTableComponent implements OnInit {
         return JSON.parse(JSON.stringify(newRow));
       });
 
-      var csv = json2csv({data: newRows, fields: titles});
+      let csv = json2csv({data: newRows, fields: titles});
       window.open("data:text/csv;charset=utf-8," + encodeURI(csv));
     });
   }
 
-  private setDateRange():void {
-    this.doFilter();
+  doQuery(): void {
+
+    if (this.settings.isRemoteDataSource) {
+      this.doFilterRemote();
+    } else {
+      this.doFilterLocal();
+    }
   }
 
-  private onSelect(event:any):void {
+  doFilterRemote():void{
+    if (this.from == null || this.from == "" || this.to == null || this.to == "") {
+      this.msgs.push({severity: 'error', summary: '由于该表是大数据量表，输入查询条件，至少包含From, To, 并且预计结果集不超过五万', detail: ''});
+      return;
+    }
+    this.dataSource.setDateRange(this.from, this.to);
+    this.dataSource.refresh();
+  }
+
+  private onSelect(event: any): void {
   }
 }
