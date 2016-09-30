@@ -45,7 +45,7 @@ export class TableService {
 
     }
 
-    saveTableMenus(selectedTable: Object, menuIds: (number)[]) {
+    saveTableMenus(selectedTable: any, menuIds: (number)[]) {
         let headers = new Headers({'Content-Type': 'application/json'});
         let options = new RequestOptions({headers: headers, withCredentials: true});
         let data = {
