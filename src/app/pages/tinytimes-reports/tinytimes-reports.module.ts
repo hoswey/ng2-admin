@@ -3,8 +3,7 @@ import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {NgaModule} from "../../theme/nga.module";
 import {routing} from "./tinytimes-reports.routing";
-import {ChartModule} from 'angular2-highcharts';
-
+import {ChartModule} from "angular2-highcharts";
 import {EasyqService, WebdisService} from "../../shared/service";
 import {TinytimesReports} from "./tinytimes-reports.component";
 import {Hour24ChannelDailySummaryComponent} from "./gf-channel/hour-24-channel-daily-summary.component";
@@ -14,9 +13,10 @@ import {MeSimpleTableModule} from "../../shared/component/me-simple-table/me-sim
 import {MeSimpleChartModule} from "../../shared/component/me-simple-chart/me-simple-chart.module";
 import {MeReportDescModule} from "../../shared/component/me-report-desc/me-report-desc.module";
 import {NumToPercentPipe} from "../../shared/pipes/format";
-import {AnchorLiveShowDayComponent} from "./anchor/anchor-live-show-day.component"
-import {MainHotUserClickComponent} from "./top-position/main-hot-user-click.component"
+import {AnchorLiveShowDayComponent} from "./anchor/anchor-live-show-day.component";
+import {MainHotUserClickComponent} from "./top-position/main-hot-user-click.component";
 import {AnchorLiveShowComponent} from "./anchor/anchor-live-show.component";
+import {ServerFilterTipsModule} from "../../shared/component/server-filter-tips/server-filter-tips.module";
 
 @NgModule({
     imports: [
@@ -27,6 +27,7 @@ import {AnchorLiveShowComponent} from "./anchor/anchor-live-show.component";
         MeSimpleTableModule,
         MeSimpleChartModule,
         MeReportDescModule,
+        ServerFilterTipsModule,
         routing
     ],
     declarations: [

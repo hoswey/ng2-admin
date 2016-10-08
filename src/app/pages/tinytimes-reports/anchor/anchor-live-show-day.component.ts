@@ -3,6 +3,7 @@ import {ReportDescBody} from "../../../shared/component/me-report-desc/me-report
 
 @Component({
   template: `
+        <server-filter-tips></server-filter-tips>
         <me-simple-table [table]="table" [settings]="settings"></me-simple-table>
         <me-report-desc [descBody]="descBody"></me-report-desc>
   `,
