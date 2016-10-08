@@ -16,6 +16,7 @@ import {MeReportDescModule} from "../../shared/component/me-report-desc/me-repor
 import {NumToPercentPipe} from "../../shared/pipes/format";
 import {AnchorLiveShowDayComponent} from "./anchor/anchor-live-show-day.component"
 import {MainHotUserClickComponent} from "./top-position/main-hot-user-click.component"
+import {AnchorLiveShowComponent} from "./anchor/anchor-live-show.component";
 
 @NgModule({
     imports: [
@@ -33,6 +34,7 @@ import {MainHotUserClickComponent} from "./top-position/main-hot-user-click.comp
         Hour24ChannelDailySummaryComponent,
         Hour24ChannelDailyDetailsComponent,
         Hour24ChannelWeeklySummaryComponent,
+        AnchorLiveShowComponent,
         AnchorLiveShowDayComponent,
         MainHotUserClickComponent,
         NumToPercentPipe
