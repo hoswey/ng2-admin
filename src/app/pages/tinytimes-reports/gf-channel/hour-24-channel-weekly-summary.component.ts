@@ -6,6 +6,9 @@ import { NumToPercentPipe } from '../../../shared/pipes/format'
       <me-simple-table [table]="table" [settings]="settings"></me-simple-table>
   `,
   styles: [
+    `th.date {
+      min-width: 120px;
+     }`,
   ],
   encapsulation: ViewEncapsulation.None,
 })
