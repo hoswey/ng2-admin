@@ -5,7 +5,7 @@ import {Hour24ChannelDailyDetailsComponent} from "./gf-channel/hour-24-channel-d
 import {Hour24ChannelWeeklySummaryComponent} from "./gf-channel/hour-24-channel-weekly-summary.component";
 import {AnchorLiveShowDayComponent} from "./anchor/anchor-live-show-day.component";
 import {MainHotUserClickComponent} from "./top-position/main-hot-user-click.component"
-import {AnchorLiveShowComponent} from "./anchor/anchor-live-show.component";
+import {AnchorLiveShowComponent} from "./live-show/anchor-live-show.component";
 
 // noinspection TypeScriptValidateTypes
 const routes: Routes = [
@@ -18,7 +18,7 @@ const routes: Routes = [
       {path: 'gf-channel/24-hour-channel-daily-details', component: Hour24ChannelDailyDetailsComponent},
       {path: 'gf-channel/24-hour-channel-weekly-summary', component: Hour24ChannelWeeklySummaryComponent},
       {path: 'anchor/anchor-live-show-day', component: AnchorLiveShowDayComponent},
-      {path: 'anchor/anchor-live-show', component: AnchorLiveShowComponent},
+      {path: 'live-show/anchor-live-show', component: AnchorLiveShowComponent},
       {path: 'top-position/main-hot-user-click', component: MainHotUserClickComponent}
     ]
   }
