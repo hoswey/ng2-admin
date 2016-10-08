@@ -5,21 +5,23 @@ import {Hour24ChannelDailyDetailsComponent} from "./gf-channel/hour-24-channel-d
 import {Hour24ChannelWeeklySummaryComponent} from "./gf-channel/hour-24-channel-weekly-summary.component";
 import {AnchorLiveShowDayComponent} from "./anchor/anchor-live-show-day.component";
 import {MainHotUserClickComponent} from "./top-position/main-hot-user-click.component"
+import {AnchorLiveShowComponent} from "./live-show/anchor-live-show.component";
 
 // noinspection TypeScriptValidateTypes
 const routes: Routes = [
-    {
-        path: '',
-        component: TinytimesReports,
-        children: [
-            {path: '', redirectTo: 'gf-channel/24-hour-channel-daily-summary', pathMatch: 'full'},
-            {path: 'gf-channel/24-hour-channel-daily-summary', component: Hour24ChannelDailySummaryComponent},
-            {path: 'gf-channel/24-hour-channel-daily-details', component: Hour24ChannelDailyDetailsComponent},
-            {path: 'gf-channel/24-hour-channel-weekly-summary', component: Hour24ChannelWeeklySummaryComponent},
-            {path: 'anchor/anchor-live-show-day', component: AnchorLiveShowDayComponent},
-            {path: 'top-position/main-hot-user-click', component: MainHotUserClickComponent}
-        ]
-    }
+  {
+    path: '',
+    component: TinytimesReports,
+    children: [
+      {path: '', redirectTo: 'gf-channel/24-hour-channel-daily-summary', pathMatch: 'full'},
+      {path: 'gf-channel/24-hour-channel-daily-summary', component: Hour24ChannelDailySummaryComponent},
+      {path: 'gf-channel/24-hour-channel-daily-details', component: Hour24ChannelDailyDetailsComponent},
+      {path: 'gf-channel/24-hour-channel-weekly-summary', component: Hour24ChannelWeeklySummaryComponent},
+      {path: 'anchor/anchor-live-show-day', component: AnchorLiveShowDayComponent},
+      {path: 'live-show/anchor-live-show', component: AnchorLiveShowComponent},
+      {path: 'top-position/main-hot-user-click', component: MainHotUserClickComponent}
+    ]
+  }
 ];
 
 export const routing = RouterModule.forChild(routes);

@@ -48,8 +48,8 @@ import {CreateTableComponent} from "./create-table.component";
 @Injectable()
 export class EditTableMenuComponent implements OnInit {
   msgs: Message[] = [];
-  public tables: Object[];
-  public selectedTable: Object = {id: -1, name: "选择表"};
+  public tables: any[];
+  public selectedTable: any = {id: -1, name: "选择表"};
   public menuTables: any[] = [
     {tableId: 1, menuId: 1, menuName: "每日概况"},
     {tableId: 1, menuId: 1, menuName: "每日概况"},
@@ -89,7 +89,7 @@ export class EditTableMenuComponent implements OnInit {
   }
 
 
-  public selectTable(table: Object): void {
+  public selectTable(table: any): void {
     this.selectedTable = table;
     this.tableService.getTableMenuByTable(table).subscribe((menuTables: any[])=> {
       this.checkboxModel = menuTables.map((menuTable: any) => {
