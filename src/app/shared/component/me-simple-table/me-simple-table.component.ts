@@ -74,10 +74,10 @@ export class MeSimpleTableComponent implements OnInit {
     if (this.settings.isRemoteDataSource) {
       this.dataSource = new RemoteDataSource(this.easyqService, this.table);
     } else {
+      this.dataSource = new LocalDataSource();
       this.easyqService.getMaxDate(this.table).subscribe((date: string) => {
         this.from = date;
         this.to = date;
-        this.dataSource = new LocalDataSource();
         this.doFilterLocal();
       });
     }
