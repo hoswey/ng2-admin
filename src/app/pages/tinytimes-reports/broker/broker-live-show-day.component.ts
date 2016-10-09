@@ -63,7 +63,7 @@ export class BrokerLiveShowDayComponent {
   };
   descBody: ReportDescBody = {
     //报表生成链接
-    url: "https://cloud.hiido.com/calculation/schedule/job/detail/6000021491",
+    url: "https://cloud.hiido.com/calculation/schedule/job/detail/6000021099",
     desc: "家族直播分析表",
     from: "2016-08-23",
     rows: [
