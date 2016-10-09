@@ -78,7 +78,16 @@ export class AnchorLiveShowComponent {
       watch_user_cnt: {
         title: '观看用户数',
         type: 'number'
+      },
+      avg_watch_duration:{
+        title: '人均观看时长',
+        type: 'number'
+      },
+      jump_rate: {
+        title: '跳出率',
+        type: 'number'
       }
+
 
     }
   };
@@ -119,6 +128,14 @@ export class AnchorLiveShowComponent {
       {
         name: "观看用户数",
         desc: "主播当次开播总的观看用户数,uid去重"
+      },
+      {
+        name: "人均观看时长",
+        desc: "总观看时长/总观看人数,单位秒"
+      },
+      {
+        name: "跳出率",
+        desc: "一分钟跳出率，观看时长小于１分钟的人次/总观看人次"
       }
 
     ]
