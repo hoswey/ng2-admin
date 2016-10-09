@@ -19,8 +19,8 @@ export interface ReportDescBody {
                 <p *ngIf="descBody.desc">{{descBody.desc}}</p>
                 <table *ngIf="descBody" class="table table-bordered" style="background-color: white">
                     <tr>
-                      <td class="span5">数据开始时间</td>
-                      <td class="span7">{{descBody.from}}</td>
+                      <td style="width: 25%">数据开始时间</td>
+                      <td style="width: 75%">{{descBody.from}}</td>
                     </tr>
                     <tr>
                       <td>报表生成链接</td>
