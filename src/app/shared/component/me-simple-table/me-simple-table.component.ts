@@ -133,7 +133,7 @@ export class MeSimpleTableComponent implements OnInit {
       let a = document.createElement("a");
       a.setAttribute('style', 'display:none;');
       document.body.appendChild(a);
-      let blob = new Blob([MeSimpleTableComponent.convertToCSV(titles,newRows)], { type: 'text/csv' });
+      let blob = new Blob([this.convertToCSV(titles,newRows)], { type: 'text/csv' });
       a.href = window.URL.createObjectURL(blob);
       a.download = (this.settings.fileName || 'download') + '.csv';
       a.click();
@@ -162,7 +162,7 @@ export class MeSimpleTableComponent implements OnInit {
   private onSelect(event: any): void {
   }
 
-  static convertToCSV(titles:string[], rowArray:any): string {
+  convertToCSV(titles:string[], rowArray:any): string {
 
     let str:string = '';
     for (let i = 0; i < titles.length; i++) {
@@ -177,7 +177,13 @@ export class MeSimpleTableComponent implements OnInit {
       for (let prop in rowArray[i]) {
 
         if (rowArray[i].hasOwnProperty(prop)) {
-          line += '"' + rowArray[i][prop] + '",' ;
+
+          let valuePrepare = this.settings.columns[prop]["valuePrepareFunction"];
+          let value = rowArray[i][prop];
+          if (valuePrepare) {
+            value = valuePrepare.call(null,value);
+          }
+          line += '"' + value + '",' ;
         }
       }
       line = line.slice(0,-1);
