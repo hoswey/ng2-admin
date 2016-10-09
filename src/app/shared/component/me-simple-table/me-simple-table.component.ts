@@ -97,7 +97,7 @@ export class MeSimpleTableComponent implements OnInit {
 
   private export2Csv(): void {
 
-    let titleMap = [];
+    let rowProps = [];
     let titles = [];
     for (const key in this.settings.columns) {
 
@@ -106,7 +106,7 @@ export class MeSimpleTableComponent implements OnInit {
       }
 
       const title: string = this.settings.columns[key]['title'];
-      titleMap[key] = title;
+      rowProps.push(key);
       titles.push(title);
     }
 
@@ -115,20 +115,31 @@ export class MeSimpleTableComponent implements OnInit {
       let newRows: any[] = rows.map((row: any) => {
 
         let newRow = {};
-        for (let key in row) {
+        for (let i in rowProps) {
 
-          if (!row.hasOwnProperty(key)) {
+          let prop = rowProps[i];
+          if (!row.hasOwnProperty(prop)) {
             continue;
           }
-          newRow[titleMap[key]] = row[key];
+          newRow[prop] = row[prop];
         }
         return JSON.parse(JSON.stringify(newRow));
       });
 
-      let csv = json2csv({data: newRows, fields: titles});
-      window.open("data:text/csv;charset=utf-8," + encodeURI(csv));
+
+      //let json2csv: any = window.json2csv;
+      //let csv = json2csv({data: newRows, fields: titles});
+      //window.open("data:text/csv;charset=utf-8," + encodeURI(csv));
+      let a = document.createElement("a");
+      a.setAttribute('style', 'display:none;');
+      document.body.appendChild(a);
+      let blob = new Blob([MeSimpleTableComponent.convertToCSV(titles,newRows)], { type: 'text/csv' });
+      a.href = window.URL.createObjectURL(blob);
+      a.download = (this.settings.fileName || 'download') + '.csv';
+      a.click();
     });
   }
+
 
   doQuery(): void {
 
@@ -149,5 +160,30 @@ export class MeSimpleTableComponent implements OnInit {
   }
 
   private onSelect(event: any): void {
+  }
+
+  static convertToCSV(titles:string[], rowArray:any): string {
+
+    let str:string = '';
+    for (let i = 0; i < titles.length; i++) {
+      str += '"' + titles[i] + '",';
+    }
+    str = str.slice(0, -1);
+    str += '\r\n';
+
+    for (let i = 0; i < rowArray.length; i++) {
+
+      let line:string = '';
+      for (let prop in rowArray[i]) {
+
+        if (rowArray[i].hasOwnProperty(prop)) {
+          line += '"' + rowArray[i][prop] + '",' ;
+        }
+      }
+      line = line.slice(0,-1);
+      str += line + '\r\n';
+    }
+
+    return str;
   }
 }
