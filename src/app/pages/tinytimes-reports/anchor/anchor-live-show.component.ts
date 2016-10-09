@@ -1,5 +1,6 @@
 import {Component, ViewEncapsulation} from "@angular/core";
 import {ReportDescBody} from "../../../shared/component/me-report-desc/me-report-desc.component";
+import {NumToPercentPipe} from "../../../shared/pipes/format/num-to-percent.pipe";
 
 @Component({
   template: `
@@ -79,13 +80,16 @@ export class AnchorLiveShowComponent {
         title: '观看用户数',
         type: 'number'
       },
-      avg_watch_duration:{
+      avg_watch_duration: {
         title: '人均观看时长',
         type: 'number'
       },
       jump_rate: {
         title: '跳出率',
-        type: 'number'
+        type: 'number',
+        valuePrepareFunction: (value)=> {
+          return new NumToPercentPipe().transform(value, 2);
+        }
       }
 
 
