@@ -15,9 +15,10 @@ import {MeReportDescModule} from "../../shared/component/me-report-desc/me-repor
 import {NumToPercentPipe} from "../../shared/pipes/format";
 import {AnchorLiveShowDayComponent} from "./anchor/anchor-live-show-day.component";
 import {MainHotUserClickComponent} from "./top-position/main-hot-user-click.component";
-import {AnchorLiveShowComponent} from "./live-show/anchor-live-show.component";
+import {AnchorLiveShowComponent} from "./anchor/anchor-live-show.component";
 import {ServerFilterTipsModule} from "../../shared/component/server-filter-tips/server-filter-tips.module";
 import {AnchorBrokerFlatComponent} from "./broker/anchor-broker-flat.component";
+import {BrokerLiveShowDayComponent} from "./broker/broker-live-show-day.component";
 
 @NgModule({
     imports: [
@@ -40,6 +41,7 @@ import {AnchorBrokerFlatComponent} from "./broker/anchor-broker-flat.component";
         AnchorLiveShowDayComponent,
         MainHotUserClickComponent,
         AnchorBrokerFlatComponent,
+        BrokerLiveShowDayComponent,
         NumToPercentPipe
     ],
     providers: [
