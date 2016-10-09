@@ -51,7 +51,7 @@ export class RemoteDataSource extends LocalDataSource {
             order: this.getEasyqSorterStr()
           }).subscribe(
             records => {
-              this.filteredAndSorted = super.sort(records);
+              this.filteredAndSorted = records;
               resolve(super.paginate(this.filteredAndSorted));
             }
           );
