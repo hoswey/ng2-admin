@@ -17,7 +17,7 @@ import {AnchorLiveShowDayComponent} from "./anchor/anchor-live-show-day.componen
 import {MainHotUserClickComponent} from "./top-position/main-hot-user-click.component";
 import {AnchorLiveShowComponent} from "./live-show/anchor-live-show.component";
 import {ServerFilterTipsModule} from "../../shared/component/server-filter-tips/server-filter-tips.module";
-import {AnchorBrokerFlatComponent} from "./live-show/anchor-broker-flat.component";
+import {AnchorBrokerFlatComponent} from "./broker/anchor-broker-flat.component";
 
 @NgModule({
     imports: [
