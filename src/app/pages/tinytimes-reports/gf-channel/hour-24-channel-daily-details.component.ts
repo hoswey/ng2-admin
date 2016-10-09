@@ -21,7 +21,7 @@ export class Hour24ChannelDailyDetailsComponent {
   table:string = 'bproduct_me_24_hour_daily_details';
 
   settings = {
-
+    fileName : "每日明细",
     columns: {
 
       date: {
