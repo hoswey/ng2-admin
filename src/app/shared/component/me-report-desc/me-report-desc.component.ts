@@ -15,12 +15,12 @@ export interface ReportDescBody {
   template: `
     <div class="container">
         <div class="row">
-            <ba-card title="报表说明" baCardClass="with-scroll table-panel col-md-6">
+            <ba-card title="报表说明" baCardClass="with-scroll table-panel col-md-7">
                 <p *ngIf="descBody.desc">{{descBody.desc}}</p>
                 <table *ngIf="descBody" class="table table-bordered" style="background-color: white">
                     <tr>
-                      <td>数据开始时间</td>
-                      <td>{{descBody.from}}</td>
+                      <td class="span5">数据开始时间</td>
+                      <td class="span7">{{descBody.from}}</td>
                     </tr>
                     <tr>
                       <td>报表生成链接</td>
