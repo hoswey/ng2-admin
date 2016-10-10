@@ -1,6 +1,7 @@
 import {Component, ViewEncapsulation} from "@angular/core";
 import {ReportDescBody} from "../../../shared/component/me-report-desc/me-report-desc.component";
 import {NumToPercentPipe} from "../../../shared/pipes/format/num-to-percent.pipe";
+import {TimeTransformPipe} from "../../../shared/pipes/format/time-transform.pipe";
 
 @Component({
   template: `
@@ -13,6 +14,7 @@ import {NumToPercentPipe} from "../../../shared/pipes/format/num-to-percent.pipe
     th.date {
       min-width: 120px;
     }
+    
         `
   ],
   encapsulation: ViewEncapsulation.None,
@@ -61,16 +63,22 @@ export class AnchorLiveShowComponent {
         type: 'number'
       },
       live_duration: {
-        title: '直播时长',
-        type: 'number'
+        title: '直播时长(分钟)',
+        type: 'number',
+        valuePrepareFunction:(value)=>{
+          return TimeTransformPipe.second2Minute(value);
+        }
       },
       stop_reason: {
         title: '停播原因',
         type: 'nubmer'
       },
       watch_duration: {
-        title: '观看时长',
-        type: 'number'
+        title: '观看时长(分钟)',
+        type: 'number',
+        valuePrepareFunction:(value)=>{
+          return TimeTransformPipe.second2Minute(value);
+        }
       },
       pcu: {
         title: 'pcu',
@@ -81,8 +89,11 @@ export class AnchorLiveShowComponent {
         type: 'number'
       },
       avg_watch_duration: {
-        title: '人均观看时长',
-        type: 'number'
+        title: '人均观看时长(分种)',
+        type: 'number',
+        valuePrepareFunction:(value)=>{
+          return TimeTransformPipe.second2Minute(value);
+        }
       },
       jump_rate: {
         title: '跳出率',
@@ -115,7 +126,7 @@ export class AnchorLiveShowComponent {
       },
       {
         name: "直播时长",
-        desc: "主播当次开播的总时长,精确到秒"
+        desc: "主播当次开播的总时长,精确到分钟"
       },
       {
         name: "停播原因",
@@ -123,7 +134,7 @@ export class AnchorLiveShowComponent {
       },
       {
         name: "观看时长",
-        desc: "观看该主播当次开播的所有观众的观看总时长,精确到秒"
+        desc: "观看该主播当次开播的所有观众的观看总时长,精确到分种"
       },
       {
         name: "PCU",
@@ -135,7 +146,7 @@ export class AnchorLiveShowComponent {
       },
       {
         name: "人均观看时长",
-        desc: "总观看时长/总观看人数,单位秒"
+        desc: "总观看时长/总观看人数,单位分钟"
       },
       {
         name: "跳出率",
