@@ -8,6 +8,7 @@ import {MainHotUserClickComponent} from "./top-position/main-hot-user-click.comp
 import {AnchorLiveShowComponent} from "./anchor/anchor-live-show.component";
 import {AnchorBrokerFlatComponent} from "./broker/anchor-broker-flat.component";
 import {BrokerLiveShowDayComponent} from "./broker/broker-live-show-day.component";
+import {AnchorLivePrivateComponent} from "./anchor/anchor-live-private.component";
 
 // noinspection TypeScriptValidateTypes
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
       {path: 'gf-channel/24-hour-channel-weekly-summary', component: Hour24ChannelWeeklySummaryComponent},
       {path: 'anchor/anchor-live-show-day', component: AnchorLiveShowDayComponent},
       {path: 'anchor/anchor-live-show', component: AnchorLiveShowComponent},
+      {path: 'anchor/anchor-live-private', component: AnchorLivePrivateComponent},
       {path: 'broker/anchor-broker-flat', component: AnchorBrokerFlatComponent},
       {path: 'broker/broker-live-show-day', component: BrokerLiveShowDayComponent},
       {path: 'top-position/main-hot-user-click', component: MainHotUserClickComponent}

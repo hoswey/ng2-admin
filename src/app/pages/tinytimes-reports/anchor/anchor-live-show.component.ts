@@ -63,7 +63,7 @@ export class AnchorLiveShowComponent {
         type: 'number'
       },
       live_duration: {
-        title: '直播时长(分钟)',
+        title: '直播时长(分)',
         type: 'number',
         valuePrepareFunction:(value)=>{
           return TimeTransformPipe.second2Minute(value);
@@ -74,7 +74,7 @@ export class AnchorLiveShowComponent {
         type: 'nubmer'
       },
       watch_duration: {
-        title: '观看时长(分钟)',
+        title: '观看时长(分)',
         type: 'number',
         valuePrepareFunction:(value)=>{
           return TimeTransformPipe.second2Minute(value);
@@ -89,7 +89,7 @@ export class AnchorLiveShowComponent {
         type: 'number'
       },
       avg_watch_duration: {
-        title: '人均观看时长(分种)',
+        title: '人均观看时长(分)',
         type: 'number',
         valuePrepareFunction:(value)=>{
           return TimeTransformPipe.second2Minute(value);
@@ -126,7 +126,7 @@ export class AnchorLiveShowComponent {
       },
       {
         name: "直播时长",
-        desc: "主播当次开播的总时长,精确到分钟"
+        desc: "主播当次开播的总时长,精确到分"
       },
       {
         name: "停播原因",
@@ -146,11 +146,11 @@ export class AnchorLiveShowComponent {
       },
       {
         name: "人均观看时长",
-        desc: "总观看时长/总观看人数,单位分钟"
+        desc: "总观看时长/总观看人数,单位分"
       },
       {
         name: "跳出率",
-        desc: "一分钟跳出率，观看时长小于１分钟的人次/总观看人次"
+        desc: "一分跳出率，观看时长小于１分的人次/总观看人次"
       }
 
     ]
