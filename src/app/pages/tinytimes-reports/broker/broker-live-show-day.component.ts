@@ -34,6 +34,10 @@ export class BrokerLiveShowDayComponent {
         title: '名称',
         type: 'string'
       },
+      anchor_cnt:{
+        title: '开播人数',
+        type: 'number'
+      },
       fans: {
         title: '新增粉丝数',
         type: 'number'
@@ -68,8 +72,12 @@ export class BrokerLiveShowDayComponent {
     from: "2016-08-23",
     rows: [
       {
+        name: "开播人数",
+        desc: "当天属于该家族开播主播的总人数"
+      },
+      {
         name:　"收入",
-        desc: "当天新增E豆收入,所有主播E豆收入累计"
+        desc: "当天该家族新增E豆收入,所有主播E豆收入累计"
       },
       {
         name: "直播时长",
