@@ -1,5 +1,6 @@
 import {Component, ViewEncapsulation} from "@angular/core";
 import {ReportDescBody} from "../../../shared/component/me-report-desc/me-report-desc.component";
+import {TimeTransformPipe} from "../../../shared/pipes/format/time-transform.pipe";
 
 @Component({
   template: `
@@ -51,12 +52,18 @@ export class BrokerLiveShowDayComponent {
         type: 'number'
       },
       live_duration: {
-        title: '直播时长',
-        type: 'number'
+        title: '直播时长(分钟)',
+        type: 'number',
+        valuePrepareFunction:(value)=>{
+          return TimeTransformPipe.second2Minute(value);
+        }
       },
       watch_duration: {
-        title: '观看时长',
-        type: 'number'
+        title: '观看时长(分钟)',
+        type: 'number',
+        valuePrepareFunction:(value)=>{
+          return TimeTransformPipe.second2Minute(value);
+        }
       },
       watch_user_cnt: {
         title: '观看人数',
@@ -80,12 +87,12 @@ export class BrokerLiveShowDayComponent {
         desc: "当天该家族新增E豆收入,所有主播E豆收入累计"
       },
       {
-        name: "直播时长",
-        desc: "家族所有主播当日开播时长,单位：秒"
+        name: "直播时长(分钟)",
+        desc: "家族所有主播当日开播时长,单位：分钟"
       },
       {
-        name: "观看时长",
-        desc: "家族所有主播当日开播观众观看总时长,单位：秒"
+        name: "观看时长(分钟)",
+        desc: "家族所有主播当日开播观众观看总时长,单位：分钟"
       },
       {
         name: "观看人数",
