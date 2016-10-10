@@ -55,8 +55,14 @@ export class AnchorBrokerFlatComponent {
         type: 'string'
       },
       headerurl: {
-        title: '头像地址',
-        type: 'string'
+        title: '头像',
+        type: 'html',
+        valuePrepareFunction: (value) => {
+          if (value)
+            return '<img width="100" src="' + value + '"/>';
+          else
+            return '';
+        }
       },
       apportion_ration: {
         title: '分成比例',
