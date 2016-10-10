@@ -3,8 +3,13 @@
     max-width: 1360px;
   }
 }
-@media (min-width: 1900px) {
+@media (min-width: 1700px) {
   .container {
-    max-width: 1800px;
+    max-width: 1560px;
+  }
+}
+@media (min-width: 1920px) {
+  .container {
+    max-width: 1840px;
   }
 }
