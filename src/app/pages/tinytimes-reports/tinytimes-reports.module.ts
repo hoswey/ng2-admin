@@ -19,6 +19,7 @@ import {AnchorLiveShowComponent} from "./anchor/anchor-live-show.component";
 import {ServerFilterTipsModule} from "../../shared/component/server-filter-tips/server-filter-tips.module";
 import {AnchorBrokerFlatComponent} from "./broker/anchor-broker-flat.component";
 import {BrokerLiveShowDayComponent} from "./broker/broker-live-show-day.component";
+import {TimeTransformPipe} from "../../shared/pipes/format/time-transform.pipe";
 
 @NgModule({
     imports: [
@@ -42,7 +43,9 @@ import {BrokerLiveShowDayComponent} from "./broker/broker-live-show-day.componen
         MainHotUserClickComponent,
         AnchorBrokerFlatComponent,
         BrokerLiveShowDayComponent,
-        NumToPercentPipe
+        NumToPercentPipe,
+        TimeTransformPipe
+
     ],
     providers: [
         EasyqService,
