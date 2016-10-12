@@ -5,7 +5,6 @@ import {TimeTransformPipe} from "../../../shared/pipes/format/time-transform.pip
 
 @Component({
   template: `
-        <server-filter-tips></server-filter-tips>
         <me-simple-table [table]="table" [settings]="settings"></me-simple-table>
         <me-report-desc [descBody]="descBody"></me-report-desc>
   `,
@@ -24,7 +23,7 @@ export class AnchorLivePrivateComponent {
   table: string = 'bproduct_me_anchor_live_private';
 
   settings = {
-    isRemoteDataSource: true,
+    isRemoteDataSource: false,
     columns: {
       date: {
         title: '日期',
