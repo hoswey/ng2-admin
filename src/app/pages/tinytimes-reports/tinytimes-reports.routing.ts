@@ -9,6 +9,7 @@ import {AnchorLiveShowComponent} from "./anchor/anchor-live-show.component";
 import {AnchorBrokerFlatComponent} from "./broker/anchor-broker-flat.component";
 import {BrokerLiveShowDayComponent} from "./broker/broker-live-show-day.component";
 import {AnchorLivePrivateComponent} from "./anchor/anchor-live-private.component";
+import {AnchorLiveEntryComponent} from "./anchor/anchor-live-entry.component";
 
 // noinspection TypeScriptValidateTypes
 const routes: Routes = [
@@ -23,6 +24,7 @@ const routes: Routes = [
       {path: 'anchor/anchor-live-show-day', component: AnchorLiveShowDayComponent},
       {path: 'anchor/anchor-live-show', component: AnchorLiveShowComponent},
       {path: 'anchor/anchor-live-private', component: AnchorLivePrivateComponent},
+      {path: 'anchor/anchor-live-entry', component: AnchorLiveEntryComponent},
       {path: 'broker/anchor-broker-flat', component: AnchorBrokerFlatComponent},
       {path: 'broker/broker-live-show-day', component: BrokerLiveShowDayComponent},
       {path: 'top-position/main-hot-user-click', component: MainHotUserClickComponent}
