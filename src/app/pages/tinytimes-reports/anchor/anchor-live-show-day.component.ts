@@ -52,14 +52,14 @@ export class AnchorLiveShowDayComponent {
         type: 'number'
       },
       live_duration: {
-        title: '直播时长(分钟)',
+        title: '直播时长(分)',
         type: 'number',
         valuePrepareFunction:(value)=>{
           return TimeTransformPipe.second2Minute(value);
         }
       },
       watch_duration: {
-        title: '观看时长(分钟)',
+        title: '观看时长(分)',
         type: 'number',
         valuePrepareFunction:(value)=>{
           return TimeTransformPipe.second2Minute(value);
@@ -97,11 +97,11 @@ export class AnchorLiveShowDayComponent {
       },
       {
         name: "直播时长",
-        desc: "主播当天所有开播的总时长,精确到分钟"
+        desc: "主播当天所有开播的总时长,精确到分"
       },
       {
         name: "观看时长",
-        desc: "观看该主播当天所有开播的所有观众的观看总时长,精确到分钟"
+        desc: "观看该主播当天所有开播的所有观众的观看总时长,精确到分"
       },
       {
         name: "PCU",
