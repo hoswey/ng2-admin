@@ -40,7 +40,6 @@ export class RemoteDataSource extends LocalDataSource {
         });
 
         let easyqFilterStr = this.getEasyqFilterStr();
-        console.log("easyqFilterStr is  " + easyqFilterStr);
         if (easyqFilterStr.length == 0) {
           resolve([]);
         } else {
@@ -123,5 +122,9 @@ export class RemoteDataSource extends LocalDataSource {
 
   count(): number {
     return this.filteredAndSorted.length;
+  }
+
+  reload():void {
+    super.emitOnChanged("refresh");
   }
 }

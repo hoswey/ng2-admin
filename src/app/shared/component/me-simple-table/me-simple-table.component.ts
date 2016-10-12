@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation, Input, Injector} from '@angular/core';
+import {Component, OnInit, OnDestroy, ViewEncapsulation, Input, Injector} from '@angular/core';
 
 import {EasyqService} from '../../service';
 import {LocalDataSource} from 'ng2-smart-table';
@@ -35,7 +35,7 @@ import {Message} from 'primeng/primeng';
   styles: [require('../../../pages/tables/components/smartTables/smartTables.scss')],
   encapsulation: ViewEncapsulation.None,
 })
-export class MeSimpleTableComponent implements OnInit {
+export class MeSimpleTableComponent implements OnInit, OnDestroy {
 
   @Input() table: string;
 
@@ -65,22 +65,43 @@ export class MeSimpleTableComponent implements OnInit {
 
   msgs: Message[] = [];
 
+  refreshTimes = 0;
+
   constructor(private easyqService: EasyqService, private injector: Injector) {
   }
 
-  ngOnInit() {
+  ngOnInit(): any {
 
     this.settings = _.merge(this.defaultSettings, this.settings);
     if (this.settings.isRemoteDataSource) {
       this.dataSource = new RemoteDataSource(this.easyqService, this.table);
+      setTimeout(()=> this.dataSource.onChanged().subscribe((elements) => {
+
+        this.refreshTimes++;
+        if (elements['action'] == "refresh" && this.refreshTimes != 1) {//The first time refresh is tigger by ng smart table component
+          this.msgs.push({severity: 'info', summary: '刷新成功', detail: ''});
+        }
+
+      }), 0);
     } else {
       this.dataSource = new LocalDataSource();
-      this.easyqService.getMaxDate(this.table).subscribe((date: string) => {
-        this.from = date;
-        this.to = date;
-        this.doFilterLocal();
-      });
     }
+
+    this.easyqService.getMaxDate(this.table).subscribe((date: string) => {
+      this.from = date;
+      this.to = date;
+      if (this.settings.isRemoteDataSource) {
+        this.doFilterRemote();
+      } else {
+        this.doFilterLocal();
+      }
+    });
+
+    console.log("ngOnInit");
+  }
+
+  ngOnDestroy(): any {
+    console.log("ngOnDestroy");
   }
 
   private doFilterLocal(): void {
@@ -156,7 +177,7 @@ export class MeSimpleTableComponent implements OnInit {
       return;
     }
     this.dataSource.setDateRange(this.from, this.to);
-    this.dataSource.refresh();
+    this.dataSource.reload();
   }
 
   private onSelect(event: any): void {
