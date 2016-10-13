@@ -54,15 +54,17 @@ export class AnchorLiveShowDayComponent {
       live_duration: {
         title: '直播时长(分)',
         type: 'number',
-        valuePrepareFunction:(value)=>{
-          return TimeTransformPipe.second2Minute(value);
+        valuePrepareFunction: (value)=> {
+          if (value)
+            return TimeTransformPipe.second2Minute(value);
         }
       },
       watch_duration: {
         title: '观看时长(分)',
         type: 'number',
-        valuePrepareFunction:(value)=>{
-          return TimeTransformPipe.second2Minute(value);
+        valuePrepareFunction: (value)=> {
+          if (value)
+            return TimeTransformPipe.second2Minute(value);
         }
       },
       pcu: {

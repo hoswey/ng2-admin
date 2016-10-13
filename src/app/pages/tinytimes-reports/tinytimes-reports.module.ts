@@ -22,39 +22,41 @@ import {BrokerLiveShowDayComponent} from "./broker/broker-live-show-day.componen
 import {TimeTransformPipe} from "../../shared/pipes/format/time-transform.pipe";
 import {AnchorLivePrivateComponent} from "./anchor/anchor-live-private.component";
 import {AnchorLiveEntryComponent} from "./anchor/anchor-live-entry.component";
+import {AnchorLiveTopComponent} from "./anchor/anchor-live-top.component";
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        NgaModule,
-        ChartModule,
-        MeSimpleTableModule,
-        MeSimpleChartModule,
-        MeReportDescModule,
-        ServerFilterTipsModule,
-        routing
-    ],
-    declarations: [
-        TinytimesReports,
-        Hour24ChannelDailySummaryComponent,
-        Hour24ChannelDailyDetailsComponent,
-        Hour24ChannelWeeklySummaryComponent,
-        AnchorLiveShowComponent,
-        AnchorLiveShowDayComponent,
-        AnchorLivePrivateComponent,
-        AnchorLiveEntryComponent,
-        MainHotUserClickComponent,
-        AnchorBrokerFlatComponent,
-        BrokerLiveShowDayComponent,
-        NumToPercentPipe,
-        TimeTransformPipe
+  imports: [
+    CommonModule,
+    FormsModule,
+    NgaModule,
+    ChartModule,
+    MeSimpleTableModule,
+    MeSimpleChartModule,
+    MeReportDescModule,
+    ServerFilterTipsModule,
+    routing
+  ],
+  declarations: [
+    TinytimesReports,
+    Hour24ChannelDailySummaryComponent,
+    Hour24ChannelDailyDetailsComponent,
+    Hour24ChannelWeeklySummaryComponent,
+    AnchorLiveShowComponent,
+    AnchorLiveShowDayComponent,
+    AnchorLivePrivateComponent,
+    AnchorLiveEntryComponent,
+    AnchorLiveTopComponent,
+    MainHotUserClickComponent,
+    AnchorBrokerFlatComponent,
+    BrokerLiveShowDayComponent,
+    NumToPercentPipe,
+    TimeTransformPipe
 
-    ],
-    providers: [
-        EasyqService,
-        WebdisService
-    ]
+  ],
+  providers: [
+    EasyqService,
+    WebdisService
+  ]
 
 })
 export default class TinytimesReportsModule {
