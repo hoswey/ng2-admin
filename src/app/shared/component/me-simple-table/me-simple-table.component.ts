@@ -78,7 +78,7 @@ export class MeSimpleTableComponent implements OnInit, OnDestroy {
       setTimeout(()=> this.dataSource.onChanged().subscribe((elements) => {
 
         this.refreshTimes++;
-        if (elements['action'] == "refresh" && this.refreshTimes != 1) {//The first time refresh is tigger by ng smart table component
+        if ( (elements['action'] == "refresh" || elements['action'] == "sort") && this.refreshTimes != 1) {//The first time refresh is tigger by ng smart table component
           this.msgs.push({severity: 'info', summary: '刷新成功', detail: ''});
         }
 
