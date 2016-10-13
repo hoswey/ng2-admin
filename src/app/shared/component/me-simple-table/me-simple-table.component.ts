@@ -201,6 +201,11 @@ export class MeSimpleTableComponent implements OnInit, OnDestroy {
 
           let valuePrepare = this.settings.columns[prop]["valuePrepareFunction"];
           let value = rowArray[i][prop];
+
+          if (!value){
+            value = "";
+          }
+
           if (valuePrepare) {
             value = valuePrepare.call(null,value);
           }
