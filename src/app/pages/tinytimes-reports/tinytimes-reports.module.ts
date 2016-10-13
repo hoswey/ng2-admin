@@ -20,6 +20,8 @@ import {ServerFilterTipsModule} from "../../shared/component/server-filter-tips/
 import {AnchorBrokerFlatComponent} from "./broker/anchor-broker-flat.component";
 import {BrokerLiveShowDayComponent} from "./broker/broker-live-show-day.component";
 import {TimeTransformPipe} from "../../shared/pipes/format/time-transform.pipe";
+import {AnchorLivePrivateComponent} from "./anchor/anchor-live-private.component";
+import {AnchorLiveEntryComponent} from "./anchor/anchor-live-entry.component";
 
 @NgModule({
     imports: [
@@ -40,6 +42,8 @@ import {TimeTransformPipe} from "../../shared/pipes/format/time-transform.pipe";
         Hour24ChannelWeeklySummaryComponent,
         AnchorLiveShowComponent,
         AnchorLiveShowDayComponent,
+        AnchorLivePrivateComponent,
+        AnchorLiveEntryComponent,
         MainHotUserClickComponent,
         AnchorBrokerFlatComponent,
         BrokerLiveShowDayComponent,
