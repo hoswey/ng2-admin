@@ -154,7 +154,7 @@ export class MeSimpleTableComponent implements OnInit, OnDestroy {
       let a = document.createElement("a");
       a.setAttribute('style', 'display:none;');
       document.body.appendChild(a);
-      let blob = new Blob([this.convertToCSV(titles,newRows)], { type: 'text/csv' });
+      let blob = new Blob(["\ufeff",this.convertToCSV(titles,newRows)], {type: 'text/csv'});
       a.href = window.URL.createObjectURL(blob);
       a.download = (this.settings.fileName || 'download') + '.csv';
       a.click();
