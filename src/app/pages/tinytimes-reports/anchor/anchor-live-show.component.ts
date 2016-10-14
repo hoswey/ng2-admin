@@ -65,18 +65,14 @@ export class AnchorLiveShowComponent {
       live_duration: {
         title: '直播时长(分)',
         type: 'number',
-        valuePrepareFunction:(value)=>{
+        valuePrepareFunction: (value) => {
           return TimeTransformPipe.second2Minute(value);
         }
-      },
-      stop_reason: {
-        title: '停播原因',
-        type: 'nubmer'
       },
       watch_duration: {
         title: '观看时长(分)',
         type: 'number',
-        valuePrepareFunction:(value)=>{
+        valuePrepareFunction: (value) => {
           return TimeTransformPipe.second2Minute(value);
         }
       },
@@ -91,19 +87,25 @@ export class AnchorLiveShowComponent {
       avg_watch_duration: {
         title: '人均观看时长(分)',
         type: 'number',
-        valuePrepareFunction:(value)=>{
+        valuePrepareFunction: (value) => {
           return TimeTransformPipe.second2Minute(value);
         }
       },
       jump_rate: {
         title: '跳出率',
         type: 'number',
-        valuePrepareFunction: (value)=> {
+        valuePrepareFunction: (value) => {
           return new NumToPercentPipe().transform(value, 2);
         }
+      },
+      web_download_cnt: {
+        title: 'web下载次数',
+        type: 'number'
+      },
+      share_cnt: {
+        title: '被分享次数',
+        type: 'number',
       }
-
-
     }
   };
   descBody: ReportDescBody = {
