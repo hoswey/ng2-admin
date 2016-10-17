@@ -1,4 +1,4 @@
-import {LocalDataSource} from 'ng2-smart-table';
+import {LocalDataSource} from 'ng2-smart-table/ng2-smart-table';
 import {EasyqService, Field} from '../../../service'
 
 export class RemoteDataSource extends LocalDataSource {

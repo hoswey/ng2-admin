@@ -1,7 +1,7 @@
 import {Component, OnInit, OnDestroy, ViewEncapsulation, Input, Injector} from '@angular/core';
 
 import {EasyqService} from '../../service';
-import {LocalDataSource} from 'ng2-smart-table';
+import {LocalDataSource} from 'ng2-smart-table/ng2-smart-table';
 import {RemoteDataSource} from './data-source/remote-data-source'
 // import {DataSource} from 'ng2-smart-table';
 import '../../loader/jquery-ui-loader'
@@ -207,7 +207,7 @@ export class MeSimpleTableComponent implements OnInit, OnDestroy {
           }
 
           if (valuePrepare) {
-            value = valuePrepare.call(null,value);
+            value = valuePrepare.call(null,value,rowArray[i]);
           }
           line += '"' + value + '",' ;
         }
