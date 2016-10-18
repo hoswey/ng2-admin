@@ -23,6 +23,7 @@ import {TimeTransformPipe} from "../../shared/pipes/format/time-transform.pipe";
 import {AnchorLivePrivateComponent} from "./anchor/anchor-live-private.component";
 import {AnchorLiveEntryComponent} from "./anchor/anchor-live-entry.component";
 import {AnchorLiveTopComponent} from "./anchor/anchor-live-top.component";
+import {AnchorLiveShowSummaryComponent} from "./anchor/anchor-live-show-summary.component";
 
 @NgModule({
   imports: [
@@ -45,7 +46,7 @@ import {AnchorLiveTopComponent} from "./anchor/anchor-live-top.component";
     AnchorLiveShowDayComponent,
     AnchorLivePrivateComponent,
     AnchorLiveEntryComponent,
-    AnchorLiveTopComponent,
+    AnchorLiveShowSummaryComponent,
     MainHotUserClickComponent,
     AnchorBrokerFlatComponent,
     BrokerLiveShowDayComponent,
