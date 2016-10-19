@@ -54,14 +54,14 @@ export class AnchorLiveShowDayComponent {
       live_duration: {
         title: '直播时长(分)',
         type: 'number',
-        valuePrepareFunction:(value)=>{
+        valuePrepareFunction: (value)=> {
           return TimeTransformPipe.second2Minute(value);
         }
       },
       watch_duration: {
         title: '观看时长(分)',
         type: 'number',
-        valuePrepareFunction:(value)=>{
+        valuePrepareFunction: (value)=> {
           return TimeTransformPipe.second2Minute(value);
         }
       },
@@ -72,6 +72,26 @@ export class AnchorLiveShowDayComponent {
       watch_user_cnt: {
         title: '观看用户数',
         type: 'number'
+      },
+      exposed_cnt: {
+        title: '曝光数',
+        type: 'number'
+      },
+      exposed_user_cnt: {
+        title: '曝光人数',
+        type: 'number'
+      },
+      click_cnt: {
+        title: '点击数',
+        type: 'number'
+      },
+      click_user_cnt: {
+        title: '点击人数',
+        type: 'number'
+      },
+      click_rate: {
+        title: '点击率',
+        type: 'number'
       }
 
     }
@@ -80,7 +100,7 @@ export class AnchorLiveShowDayComponent {
   descBody: ReportDescBody = {
     //报表生成链接
     url: "https://cloud.hiido.com/calculation/schedule/job/detail/6000021087?tab=info",
-    desc: "主播直播日报表",
+    desc: "主播直播日报表,此报表包含TOP主播表的字段",
     from: "2016-08-30",
     rows: [
       {
