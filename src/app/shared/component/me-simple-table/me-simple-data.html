@@ -2,9 +2,9 @@
   <div class="card-header row" style="height: 54px"> <!-- 覆盖默认的44px高度-->
     <div class="col-md-8">
       <span style="padding-left: 6px">From&nbsp;</span>:
-      <p-calendar [(ngModel)]="from" dateFormat="yy-mm-dd" (onSelect) = "onSelect($event)"  ngDefaultControl></p-calendar>
+      <p-calendar [(ngModel)]="from" dateFormat="yy-mm-dd" (onSelect) = "onSelectDate($event)"  ngDefaultControl></p-calendar>
       To:&nbsp;
-      <p-calendar [(ngModel)]="to" dateFormat="yy-mm-dd" (onSelect) = "onSelect($event)"  ngDefaultControl></p-calendar>
+      <p-calendar [(ngModel)]="to" dateFormat="yy-mm-dd" (onSelect) = "onSelectDate($event)"  ngDefaultControl></p-calendar>
       <button class="btn btn-warning" (click)="doQuery()">查询</button>
     </div>
     <div class="col-md-4 text-right">

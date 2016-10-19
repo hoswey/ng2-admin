@@ -26,18 +26,30 @@ export class AnchorTypeExposedDayComponent {
         type: 'string'
       },
       exposed_cnt: {
+        title: '曝光人次',
+        type: 'number',
+        isDisplay: false,
+      },
+      exposed_cnt_dod_ratio: {
         title: '曝光人次(环比)',
         type: 'number',
+        isExport: false,
         valuePrepareFunction: (value, row) => {
-          return value + '(' + new NumToPercentPipe().transform(row.exposed_cnt_dod_ratio, 2) + ')';
+          return row.exposed_cnt + '(' + new NumToPercentPipe().transform(value, 2) + ')';
         }
       },
       exposed_user_cnt: {
+        title: '曝光人数',
+        type: 'number',
+        isDisplay: false,
+      },
+      exposed_user_cnt_dod_ratio: {
         title: '曝光人数(环比)',
         type: 'number',
         valuePrepareFunction: (value, row) => {
-          return value + '(' + new NumToPercentPipe().transform(row.exposed_user_cnt_dod_ratio, 2) + ')';
-        }
+          return row.exposed_user_cnt + '(' + new NumToPercentPipe().transform(value, 2) + ')';
+        },
+        isExport: false,
       },
       exposed_cnt_ratio: {
         title: '曝光人次占比',
