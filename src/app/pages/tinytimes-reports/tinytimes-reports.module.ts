@@ -24,6 +24,7 @@ import {AnchorLivePrivateComponent} from "./anchor/anchor-live-private.component
 import {AnchorLiveEntryComponent} from "./anchor/anchor-live-entry.component";
 import {AnchorLiveShowSummaryComponent} from "./anchor/anchor-live-show-summary.component";
 import {AnchorDataSourceComponent} from "./anchor/anchor-data-source.component";
+import {AnchorTypeExposedDayComponent} from "./data-weekly-report/anchor-type-exposed-day.component";
 
 @NgModule({
   imports: [
@@ -51,6 +52,7 @@ import {AnchorDataSourceComponent} from "./anchor/anchor-data-source.component";
     MainHotUserClickComponent,
     AnchorBrokerFlatComponent,
     BrokerLiveShowDayComponent,
+    AnchorTypeExposedDayComponent,
     NumToPercentPipe,
     TimeTransformPipe
   ],
