@@ -1,14 +1,14 @@
-import { Component, Input} from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 export class ReportDescRow {
-  name:string;
-  desc:string;
+  name: string;
+  desc: string;
 }
 export interface ReportDescBody {
-  url:string;
-  desc?:string;
-  from:string;
-  rows:ReportDescRow[];
+  url: string;
+  desc?: string;
+  from: string;
+  rows: ReportDescRow[];
 }
 @Component({
   selector: "me-report-desc",
@@ -28,7 +28,7 @@ export interface ReportDescBody {
                     </tr>
                     <tr *ngFor="let row of descBody.rows">
                       <td>{{row.name}}</td>
-                      <td>{{row.desc}}</td>
+                      <td [innerHTML]="row.desc"></td>
                     </tr>
                 </table>
             </ba-card>

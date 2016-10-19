@@ -1,37 +1,16 @@
 import {Component, OnInit, OnDestroy, ViewEncapsulation, Input, Injector} from '@angular/core';
 
 import {EasyqService} from '../../service';
-import {LocalDataSource} from 'ng2-smart-table';
+import {LocalDataSource} from 'ng2-smart-table/ng2-smart-table';
 import {RemoteDataSource} from './data-source/remote-data-source'
-// import {DataSource} from 'ng2-smart-table';
+
 import '../../loader/jquery-ui-loader'
 import * as _ from 'lodash';
 import {Message} from 'primeng/primeng';
 
 @Component({
   selector: "me-simple-table",
-  template: `
-    <div class="animated fadeIn card container with-scroll">
-      <div class="card-header row" style="height: 54px"> <!-- 覆盖默认的44px高度-->
-            <div class="col-md-8">
-              <span style="padding-left: 6px">From&nbsp;</span>:
-              <p-calendar [(ngModel)]="from" dateFormat="yy-mm-dd" (onSelect) = "onSelect($event)"  ngDefaultControl></p-calendar>
-              To:&nbsp;
-              <p-calendar [(ngModel)]="to" dateFormat="yy-mm-dd" (onSelect) = "onSelect($event)"  ngDefaultControl></p-calendar>
-              <button class="btn btn-warning" (click)="doQuery()">查询</button>
-          </div>
-          <div class="col-md-4 text-right">
-              <button class="btn btn-primary" (click)="export2Csv()">导出</button>
-          </div>
-        </div>
-        <div class="card-body row">
-          <div class="col-md-12">
-            <ng2-smart-table [settings]="settings" [source]="dataSource"></ng2-smart-table>
-          </div>
-        </div>
-      </div>
-      <p-growl name="message" [value]="msgs"></p-growl>
-  `,
+  template: require('./me-simple-data.html') ,
   styles: [require('../../../pages/tables/components/smartTables/smartTables.scss')],
   encapsulation: ViewEncapsulation.None,
 })
@@ -67,7 +46,7 @@ export class MeSimpleTableComponent implements OnInit, OnDestroy {
 
   refreshTimes = 0;
 
-  constructor(private easyqService: EasyqService, private injector: Injector) {
+  constructor(private easyqService: EasyqService) {
   }
 
   ngOnInit(): any {
@@ -78,7 +57,7 @@ export class MeSimpleTableComponent implements OnInit, OnDestroy {
       setTimeout(()=> this.dataSource.onChanged().subscribe((elements) => {
 
         this.refreshTimes++;
-        if (elements['action'] == "refresh" && this.refreshTimes != 1) {//The first time refresh is tigger by ng smart table component
+        if ( (elements['action'] == "refresh" || elements['action'] == "sort") && this.refreshTimes != 1) {//The first time refresh is tigger by ng smart table component
           this.msgs.push({severity: 'info', summary: '刷新成功', detail: ''});
         }
 
@@ -96,12 +75,9 @@ export class MeSimpleTableComponent implements OnInit, OnDestroy {
         this.doFilterLocal();
       }
     });
-
-    console.log("ngOnInit");
   }
 
   ngOnDestroy(): any {
-    console.log("ngOnDestroy");
   }
 
   private doFilterLocal(): void {
@@ -116,7 +92,7 @@ export class MeSimpleTableComponent implements OnInit, OnDestroy {
     });
   }
 
-  private export2Csv(): void {
+   export2Csv(): void {
 
     let rowProps = [];
     let titles = [];
@@ -147,14 +123,12 @@ export class MeSimpleTableComponent implements OnInit, OnDestroy {
         return JSON.parse(JSON.stringify(newRow));
       });
 
-
-      //let json2csv: any = window.json2csv;
-      //let csv = json2csv({data: newRows, fields: titles});
-      //window.open("data:text/csv;charset=utf-8," + encodeURI(csv));
       let a = document.createElement("a");
       a.setAttribute('style', 'display:none;');
       document.body.appendChild(a);
-      let blob = new Blob([this.convertToCSV(titles,newRows)], { type: 'text/csv' });
+
+      //Set utf-8 header to let excel recognize its encoding
+      let blob = new Blob(["\ufeff",this.convertToCSV(titles,newRows)], {type: 'text/csv'});
       a.href = window.URL.createObjectURL(blob);
       a.download = (this.settings.fileName || 'download') + '.csv';
       a.click();
@@ -180,7 +154,7 @@ export class MeSimpleTableComponent implements OnInit, OnDestroy {
     this.dataSource.reload();
   }
 
-  private onSelect(event: any): void {
+   onSelect(event: any): void {
   }
 
   convertToCSV(titles:string[], rowArray:any): string {
@@ -201,8 +175,13 @@ export class MeSimpleTableComponent implements OnInit, OnDestroy {
 
           let valuePrepare = this.settings.columns[prop]["valuePrepareFunction"];
           let value = rowArray[i][prop];
+
+          if (!value){
+            value = "";
+          }
+
           if (valuePrepare) {
-            value = valuePrepare.call(null,value);
+            value = valuePrepare.call(null,value,rowArray[i]);
           }
           line += '"' + value + '",' ;
         }

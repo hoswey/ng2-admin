@@ -11,7 +11,7 @@ export class TimeTransformPipe {
   static second2Minute(input: number): string {
     if (input)
       return (input / 60).toFixed(2);
-    else return 0;
+    else return '0';
   }
 
   // 秒转小时
@@ -19,7 +19,7 @@ export class TimeTransformPipe {
     if (input)
       return (input / 60 / 60).toFixed(2);
     else
-      return 0;
+      return '0';
   }
 
 }

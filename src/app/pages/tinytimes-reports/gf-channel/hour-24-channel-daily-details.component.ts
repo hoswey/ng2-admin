@@ -67,7 +67,7 @@ export class Hour24ChannelDailyDetailsComponent {
       jump_rate: {
         title: '跳出率',
         type: 'number',
-        valuePrepareFunction: (value) => {
+        valuePrepareFunction: (value, row) => {
           return new NumToPercentPipe().transform(value, 2);
         }
       }

@@ -2,11 +2,12 @@ import {Component, OnInit, Input} from "@angular/core";
 import {Observable} from "rxjs/Observable";
 import {EasyqService} from "../../service";
 import "../../loader/jquery-ui-loader";
-
+import * as _ from 'lodash';
 
 class Column {
   name: string;
   title: string;
+  yAxisLabelsFormatterFunction: any;
 }
 
 @Component({
@@ -69,8 +70,6 @@ export class MeSimpleChartComponent implements OnInit {
 
   ngOnInit(): void {
 
-    console.log(JSON.stringify(this.settings.columns));
-
     this.columns = [];
     for (const key in this.settings.columns) {
 
@@ -81,6 +80,7 @@ export class MeSimpleChartComponent implements OnInit {
       let column: Column = new Column();
       column.name = key;
       column.title = this.settings.columns[key]['title'];
+      column.yAxisLabelsFormatterFunction = this.settings.columns[key]['yAxisLabelsFormatterFunction'];
 
       if (this.settings.columns[key]['isDisplayChart'] == true) {
         this.columns.push(column);
@@ -156,31 +156,47 @@ export class MeSimpleChartComponent implements OnInit {
                   };
                 });
 
-                serials = serials.map((serial) =>{
+                serials = serials.map((serial) => {
                   //对于数据不全的，补全数据
-                  let name:string = serial.name;
-                  let points:number[] = serial.data;
+                  let name: string = serial.name;
+                  let points: number[] = serial.data;
 
                   const left = dates.length - points.length;
-                  for (let k:number=0; k < left; k++){
+                  for (let k: number = 0; k < left; k++) {
                     points.unshift(0);
                   }
 
                   return {
-                    name : name,
+                    name: name,
                     data: points
                   };
                 });
 
-                this.options = {
+                let options = {
                   title: {
                     text: this.selectedColumn.title
                   },
                   xAxis: {
                     categories: dates
                   },
-                  series: serials
+                  series: serials,
+                  yAxis: {
+                    title: ''
+                  }
                 };
+
+                // if (this.selectedColumn.yAxisLabelsFormatterFunction) {
+                //   options = _.merge(options, {
+                //     yAxis: {
+                //       labels: {
+                //         shared: false,
+                //         formatter: this.selectedColumn.yAxisLabelsFormatterFunction
+                //       }
+                //     }
+                //   });
+                // }
+                this.options = options;
+                console.log(JSON.stringify(this.options))
               }
             )
           }
