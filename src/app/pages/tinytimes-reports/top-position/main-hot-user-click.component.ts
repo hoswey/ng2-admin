@@ -7,6 +7,12 @@ class MainHotUserClick {
   position:number;
   time:number;
   count:number;
+
+  constructor(position:number, time:number, count: number) {
+    this.position = position;
+    this.time = time;
+    this.count = count;
+  }
 }
 
 @Component({
@@ -57,13 +63,21 @@ export class MainHotUserClickComponent implements OnInit, OnDestroy {
     this.webdisService.query("/lrange/MainHotUserClick/0/1000").subscribe(
       resp => {
 
+        // let userClicks:[MainHotUserClick] = resp.lrange.map(item =>{
+        //   return JSON.parse(item, (key, value) =>{
+        //     // if (key == "time") {
+        //     //   return new Date(value)
+        //     // }
+        //     return value;
+        //   });
+        // });
         let userClicks:[MainHotUserClick] = resp.lrange.map(item =>{
-          return JSON.parse(item, (key, value) =>{
-            // if (key == "time") {
-            //   return new Date(value)
-            // }
-            return value;
-          });
+            item = item.replace("position","\"position\"");
+            item = item.replace("platform","\"platform\"");
+            item = item.replace("count","\"count\"");
+            item = item.replace("time","\"time\"");
+            const json = JSON.parse(item);
+            return new MainHotUserClick(json.position,json.time,json.count);
         });
 
         const map:Map<Number, MainHotUserClick[]> = new Map<Number, MainHotUserClick[]>();
